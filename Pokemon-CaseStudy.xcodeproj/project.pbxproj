@@ -16,7 +16,6 @@
 		A99C014A2913B46F00B724B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A99C01492913B46F00B724B4 /* Assets.xcassets */; };
 		A99C014D2913B46F00B724B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A99C014B2913B46F00B724B4 /* LaunchScreen.storyboard */; };
 		A99C01592913B4FE00B724B4 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C01582913B4FE00B724B4 /* Extension+UIView.swift */; };
-		A99C01622913B60C00B724B4 /* PokemonModule in Resources */ = {isa = PBXBuildFile; fileRef = A99C01612913B60C00B724B4 /* PokemonModule */; };
 		A99C016C2913BBAA00B724B4 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C016B2913BBAA00B724B4 /* PokemonViewController.swift */; };
 		A99C01722913C47300B724B4 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C01712913C47300B724B4 /* BaseService.swift */; };
 		A99C01752913C49500B724B4 /* LottieHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C01742913C49500B724B4 /* LottieHud.swift */; };
@@ -41,7 +40,6 @@
 		A99C014C2913B46F00B724B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A99C014E2913B46F00B724B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A99C01582913B4FE00B724B4 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
-		A99C01612913B60C00B724B4 /* PokemonModule */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PokemonModule; sourceTree = "<group>"; };
 		A99C016B2913BBAA00B724B4 /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
 		A99C01712913C47300B724B4 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		A99C01742913C49500B724B4 /* LottieHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHud.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				A99C01492913B46F00B724B4 /* Assets.xcassets */,
 				A99C014B2913B46F00B724B4 /* LaunchScreen.storyboard */,
 				A99C014E2913B46F00B724B4 /* Info.plist */,
-				A99C01612913B60C00B724B4 /* PokemonModule */,
 			);
 			path = "Pokemon-CaseStudy";
 			sourceTree = "<group>";
@@ -256,7 +253,6 @@
 				A99C014D2913B46F00B724B4 /* LaunchScreen.storyboard in Resources */,
 				A99C01892913CAC700B724B4 /* loading-4-dot.json in Resources */,
 				A99C014A2913B46F00B724B4 /* Assets.xcassets in Resources */,
-				A99C01622913B60C00B724B4 /* PokemonModule in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,11 +14,11 @@ final class PokemonPresenter: PokemonPresenterProtocol {
     var responseModel : ResponseModel?
     
     func fetchPokemons(_ nextPage:Bool) {
-        nextPage ? interactor?.getPokemons(responseModel?.next) : interactor?.getPokemons(requestModel.requestPath)
+        nextPage ? interactor?.getPokemons(NetworkHelpers.configureUrlToPath(responseModel?.next ?? requestModel.requestPath)) : interactor?.getPokemons(requestModel.requestPath)
     }
     
-    func showPokemonDetail(_ pokemonUrl: String?) {
-        
+    func showPokemonDetail(_ pokemon: Result) {
+        router?.presentPokemonDetail(pokemon)
     }
     
     func fetchPokemonImageURL(_ urlList: [String]?) {

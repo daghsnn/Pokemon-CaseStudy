@@ -19,7 +19,7 @@ protocol PokemonPresenterProtocol : AnyObject {
     var router: PokemonRouterProtocol?{get set}
     func fetchPokemons(_ nextPage:Bool)
     func fetchPokemonImageURL(_ urlList: [String]?)
-    func showPokemonDetail(_ pokemonUrl: String?)
+    func showPokemonDetail(_ pokemon: Result)
     
 }
 
@@ -36,7 +36,6 @@ protocol PokemonInteractorOutputProtocol : AnyObject {
 }
 
 protocol PokemonRouterProtocol {
-    static func startPokemonExecution() -> UIViewController
-    func presentDigerSayfa(/* buraya model ve view protocol
-         from view: PostListViewProtocol, forPost post: PostModel*/)
+    static func startPokemonExecution()
+    func presentPokemonDetail(_ pokemon: Result)
 }

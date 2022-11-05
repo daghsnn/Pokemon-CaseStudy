@@ -8,8 +8,8 @@
 import UIKit
 
 final class PokemonRouter : PokemonRouterProtocol {
-
-    static func startPokemonExecution() -> UIViewController {
+    static var navController : UINavigationController!
+    static func startPokemonExecution() {
         let view: PokemonViewProtocol & UIViewController = PokemonViewController()
         let presenter: PokemonPresenterProtocol & PokemonInteractorOutputProtocol = PokemonPresenter()
         let interactor: PokemonInteractorProtocol = PokemonInteractor()
@@ -21,12 +21,15 @@ final class PokemonRouter : PokemonRouterProtocol {
         presenter.interactor = interactor
         interactor.presenter = presenter
 
-        return UINavigationController(rootViewController: view)
+        navController = UINavigationController(rootViewController: view)
     }
     
-    func presentDigerSayfa() {
-        //
+    func presentPokemonDetail(_ pokemon: Result) {
+        PokemonDetailRouter.startPokemonDetailExecution(pokemon)
+        PokemonRouter.navController.pushViewController(PokemonDetailViewController(), animated: true)
+        
     }
+    
     
     
 }

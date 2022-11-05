@@ -21,6 +21,7 @@ final class PokemonViewController:UIViewController {
         cv.dataSource = self
 //        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: HomeCell.cellId)
         return cv
+        
     }()
     
     override func viewDidLoad() {
@@ -72,7 +73,7 @@ extension PokemonViewController: PokemonViewProtocol {
 
 extension PokemonViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        0
+        return pokemons?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

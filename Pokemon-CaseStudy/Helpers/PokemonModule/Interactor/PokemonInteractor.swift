@@ -17,7 +17,7 @@ final class PokemonInteractor: PokemonInteractorProtocol {
             } else if let data = data {
                 do {
                     let responseModel = try JSONDecoder().decode(ResponseModel.self, from: data)
-                    self.presenter?.displayPokemons(responseModel)
+                    self.presenter?.preparePokemons(responseModel)
                 } catch {
                     self.presenter?.displayError(error.localizedDescription)
                 }
@@ -25,4 +25,22 @@ final class PokemonInteractor: PokemonInteractorProtocol {
         }
     }
     
+    func getPokemonImageURL(_ urlList: [String]) {
+        var convertedUrls: [URL]? = [URL]()
+        
+        for url in urlList {
+            let path = NetworkHelpers.configureUrlToPath(url)
+            BaseService.shared.sendRequest(path) {[weak self] (data, error) in
+                if let data = data {
+                    do {
+                        let imageModel = try JSONDecoder().decode(Sprites.self, from: data)
+                        convertedUrls?.append(URL(string: imageModel.frontDefault ?? "")!)
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
+        presenter?.displayPokemonsWithUrl(convertedUrls)
+    }
 }

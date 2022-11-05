@@ -22,9 +22,8 @@ protocol BaseServiceProtocol {
 }
 
 final class BaseService : ServiceConfiguration {
-    private let baseUrl = Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String
     static let shared = BaseService()
-    var path : String = "pokemon?limit=50&offset=0"
+    var path : String = String()
     var session : Session = Session()
     private init(){}
 
@@ -60,8 +59,8 @@ extension BaseService : BaseServiceProtocol {
         } else {
             completion(nil,.unReachable)
         }
-        
-        guard let baseUrl = baseUrl, var url = URL(string: baseUrl + path) else{
+
+        guard let baseUrl = NetworkHelpers.BASEURL, var url = URL(string: baseUrl + path) else{
             completion(nil,.unReachable)
             return}
         

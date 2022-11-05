@@ -18,7 +18,15 @@ struct ResponseModel: Codable {
 struct Result: Codable {
     let name: String?
     let url: String?
-    var imageUrl: URL?
+    var imageUrl: URL? {
+        if let url = url {
+            var replacedString = url.replacingOccurrences(of: NetworkHelpers.BASEURL!, with: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/", options: .anchored)
+            replacedString.removeLast()
+            replacedString.append(".png")
+            return URL(string: replacedString)
+        }
+        return URL(string: "asdsa")
+    }
 }
 
 struct PokemonRequestModel {
@@ -28,7 +36,14 @@ struct PokemonRequestModel {
         return "pokemon?limit=\(String(limit))&offset=\(String(offset))"
     }
 }
+// Kullanılmayan modeller
+struct ImageModel:Decodable {
+    let sprites: Sprites?
+}
 
 struct Sprites:Decodable {
     let frontDefault: String?
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
 }

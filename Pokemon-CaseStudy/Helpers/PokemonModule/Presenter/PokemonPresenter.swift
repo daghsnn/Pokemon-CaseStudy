@@ -22,38 +22,44 @@ final class PokemonPresenter: PokemonPresenterProtocol {
     }
     
     func fetchPokemonImageURL(_ urlList: [String]?) {
-        if let urlList = urlList {
-            interactor?.getPokemonImageURL(urlList)
-        }
+//        if let urlList = urlList {
+//            interactor?.getPokemonImageURL(urlList)
+//        }
     }
     
     fileprivate func configureUrlModel(url: [URL]?){
-        if let result = responseModel?.results, (url?.count == responseModel?.results?.count) {
-            for (index, _) in result.enumerated() {
-                responseModel?.results?[index].imageUrl = url?[index]
-            }
-        }
+//        if let result = responseModel?.results, (url?.count == responseModel?.results?.count) {
+//            for (index, _) in result.enumerated() {
+//                responseModel?.results?[index].imageUrl = url?[index]
+//            }
+//        }
     }
 }
 
 extension PokemonPresenter: PokemonInteractorOutputProtocol {
-    func displayPokemonsWithUrl(_ url: [URL]?) {
-        configureUrlModel(url: url)
-        guard let result = responseModel?.results else {
-            displayError("Results Not Found..")
-            return
-        }
-        view?.updateView(result)
-    }
     
     func preparePokemons(_ response: ResponseModel) {
         self.responseModel = response
-        if let urlList = response.results?.compactMap({$0.url}) {
-            interactor?.getPokemonImageURL(urlList)
+        if let result = response.results {
+            view?.updateView(result)
         }
+        // VIPER kullanarak ile resulttan sonra tekrar url e giderken background threadde oldugu için mimariye uygun gidemedim
+//        if let urlList = response.results?.compactMap({$0.url}) {
+//            interactor?.getPokemonImageURL(urlList)
+//        }
+
     }
     
     func displayError(_ error: String) {
         view?.showError(error)
+    }
+    
+    func displayPokemonsWithUrl(_ url: [URL]?) {
+//        configureUrlModel(url: url)
+//        guard let result = responseModel?.results else {
+//            displayError("Results Not Found..")
+//            return
+//        }
+//        view?.updateView(result)
     }
 }

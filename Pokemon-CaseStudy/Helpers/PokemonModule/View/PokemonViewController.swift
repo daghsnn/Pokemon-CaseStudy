@@ -13,13 +13,12 @@ final class PokemonViewController:UIViewController {
     var pokemons:[Result]?
     private lazy var collectionView : UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.showsVerticalScrollIndicator = false
         cv.backgroundColor = .clear
         cv.delegate = self
         cv.dataSource = self
-//        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: HomeCell.cellId)
+        cv.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.cellId)
         return cv
         
     }()
@@ -35,7 +34,8 @@ final class PokemonViewController:UIViewController {
     }
     
     private func configureNavBar(){
-        navigationController?.title = "Pokemon Case Study"
+        navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundColor")
+        title = "Pokemon Case Study"
         navigationController?.modalTransitionStyle = .flipHorizontal
         navigationController?.isNavigationBarHidden = false
     }
@@ -71,15 +71,34 @@ extension PokemonViewController: PokemonViewProtocol {
 }
 // MARK:- Collection View Delegate & Datasource
 
-extension PokemonViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension PokemonViewController : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokemons?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        UICollectionViewCell()
-        // pagination 
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.cellId, for: indexPath ) as? PokemonCell, let model = pokemons?[indexPath.row], let count = pokemons?.count {
+            
+            cell.configureCell(model)
+            
+//            if let page = requestModel.page, indexPath.row == count - 1 {
+//                makeRequest(requestModel.s ?? "", page+1)
+//            }
+            
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 3 - 8, height: UIView.HEIGHT * 0.2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 16
+    }
     
 }

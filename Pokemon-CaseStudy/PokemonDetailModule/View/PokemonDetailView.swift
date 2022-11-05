@@ -251,17 +251,14 @@ final class PokemonDetailView : UIView {
     }
     
     func displayUI(_ model : PokemonDetailResponseModel) {
-        print(model.name)
-//        if let modelUrl = model?.poster {
-//            imgView.sd_setImage(with: URL(string: modelUrl), placeholderImage: UIImage(systemName: "camera.circle.fill"), options: .continueInBackground)
-//        }
-//        
-//        titleLabel.text = model?.title
-//        durationLabel.text = model?.runtime
-//        imdbRateLabel.text = model?.imdbRating
-//        releaseInfoLabel.text = model?.released
-//        genreInfoLabel.text = model?.genre
-//        plotInfo.text = model?.plot
+        if let modelUrl = model.sprites?.frontDefault {
+            imgView.sd_setImage(with: URL(string: modelUrl), placeholderImage: UIImage(systemName: "camera.circle.fill"), options: .continueInBackground)
+        }
+        
+        titleLabel.text = model.name
+        durationLabel.text = model.locationAreaEncounters
+        imdbRateLabel.text = model.heldItems?.first
+        releaseInfoLabel.text = model.name
     }
     
     override func layoutSubviews() {

@@ -9,7 +9,7 @@ import UIKit
 
 final class PokemonDetailRouter : PokemonDetailRouterProtocol {
     static func startPokemonDetailExecution(_ pokemon : Result) {
-        let view: PokemonDetailViewProtocol & UIViewController = PokemonDetailViewController()
+        let view: PokemonDetailViewProtocol & UIViewController = PokemonDetailViewController(pokemon: pokemon)
         let presenter: PokemonDetailPresenterProtocol & PokemonDetailInteractorOutputProtocol = PokemonDetailPresenter()
         let interactor: PokemonDetailInteractorProtocol = PokemonDetailInteractor()
         let router: PokemonDetailRouterProtocol = PokemonDetailRouter()
@@ -18,7 +18,7 @@ final class PokemonDetailRouter : PokemonDetailRouterProtocol {
         presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
-        view.presenter?.fetchPokemonDetails(pokemon.url)
+        PokemonRouter.navController.pushViewController(view, animated: true)
     }
 
 }

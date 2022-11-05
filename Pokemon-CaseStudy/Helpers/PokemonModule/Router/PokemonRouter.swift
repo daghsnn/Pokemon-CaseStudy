@@ -25,9 +25,7 @@ final class PokemonRouter : PokemonRouterProtocol {
     }
     
     func presentPokemonDetail(_ pokemon: Result) {
-        PokemonDetailRouter.startPokemonDetailExecution(pokemon)
-        PokemonRouter.navController.pushViewController(PokemonDetailViewController(), animated: true)
-        
+        PokemonDetailRouter.startPokemonDetailExecution(pokemon)        
     }
     
     

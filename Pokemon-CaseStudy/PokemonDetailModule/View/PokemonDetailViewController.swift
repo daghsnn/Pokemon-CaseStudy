@@ -12,9 +12,25 @@ final class PokemonDetailViewController: UIViewController {
     private var viewPage = PokemonDetailView()
     var presenter: PokemonDetailPresenterProtocol?
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(pokemon:Result) {
+        self.pokemon = pokemon
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
+        configureUI()
+        presenter?.fetchPokemonDetails(pokemon?.url)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +46,7 @@ final class PokemonDetailViewController: UIViewController {
     }
 
     private func configureNavBar(){
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = true
     }
 }
 

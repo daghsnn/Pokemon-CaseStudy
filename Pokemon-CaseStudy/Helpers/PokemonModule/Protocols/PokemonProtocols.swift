@@ -18,7 +18,6 @@ protocol PokemonPresenterProtocol : AnyObject {
     var interactor: PokemonInteractorProtocol? {get set}
     var router: PokemonRouterProtocol?{get set}
     func fetchPokemons(_ nextPage:Bool)
-    func fetchPokemonImageURL(_ urlList: [String]?)
     func showPokemonDetail(_ pokemon: Result)
     
 }
@@ -26,11 +25,9 @@ protocol PokemonPresenterProtocol : AnyObject {
 protocol PokemonInteractorProtocol : AnyObject {
     var presenter: PokemonInteractorOutputProtocol?{get set}
     func getPokemons(_ nextPage: String?)
-    func getPokemonImageURL(_ urlList: [String])
 }
 
 protocol PokemonInteractorOutputProtocol : AnyObject {
-    func displayPokemonsWithUrl(_ url: [URL]?)
     func preparePokemons(_ response: ResponseModel)
     func displayError(_ error:String)
 }

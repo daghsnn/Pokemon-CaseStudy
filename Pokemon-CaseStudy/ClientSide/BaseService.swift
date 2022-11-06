@@ -25,7 +25,9 @@ final class BaseService : ServiceConfiguration {
     static let shared = BaseService()
     var path : String = String()
     var session : Session = Session()
-    private init(){}
+    private init(){
+        configureSession()
+    }
 
     private func hideLoading(){
         DispatchQueue.main.async {
@@ -68,7 +70,6 @@ extension BaseService : BaseServiceProtocol {
             url = URL(string: baseUrl + nextUrl) ?? url
         }
         
-        configureSession()
         session.request(url, method: .get, encoding: URLEncoding.httpBody, headers: HTTPHeaders.default).validate(contentType: ["application/json"]).responseJSON { [weak self] (response) in
             if let statusCode = response.response?.statusCode {
                 self?.hideLoading()

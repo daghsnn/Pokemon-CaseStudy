@@ -121,6 +121,11 @@ final class PokemonDetailView : UIView {
         return view
     }()
     
+    private lazy var lineView3 : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "lineColor")
+        return view
+    }()
     
     private lazy var characterInfoLbl : UILabel = {
         let text = UILabel()
@@ -144,6 +149,7 @@ final class PokemonDetailView : UIView {
         addSubview(imgView)
         addSubview(backButton)
         addSubview(titleLabel)
+        addSubview(lineView3)
         addSubview(attackIcon)
         addSubview(attackLabel)
         addSubview(defenceIcon)
@@ -173,9 +179,16 @@ final class PokemonDetailView : UIView {
             maker.centerX.equalToSuperview()
         }
         
+        lineView3.snp.makeConstraints { (maker) in
+            maker.height.equalTo(1)
+            maker.top.equalTo(titleLabel.snp.bottom).offset(16)
+            maker.leading.equalTo(defenceIcon.snp.leading)
+            maker.trailing.equalToSuperview().inset(UIView.WIDTH * 0.08)
+        }
+        
         attackIcon.snp.makeConstraints { (maker) in
             maker.leading.equalTo(backButton.snp.leading)
-            maker.top.equalTo(titleLabel.snp.bottom).offset(16)
+            maker.top.equalTo(lineView3.snp.bottom).offset(16)
             maker.size.equalTo(32)
         }
         
@@ -244,7 +257,7 @@ final class PokemonDetailView : UIView {
     
     func displayUI(_ model : PokemonDetailResponseModel) {
         self.imageUrlList = model.sprites?.imageUrlList ?? []
-        imgView.sd_setImage(with: URL(string: imageUrlList.first ?? ""))
+        imgView.sd_setImage(with: URL(string: model.sprites?.frontDefault ?? ""))
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(configureImageView), userInfo: nil, repeats: true)
         titleLabel.text = model.name?.capitalized
         characterInfoLbl.text = "Height \(String(model.height ?? 0)) - Weight \(String(model.weight ?? 0))"

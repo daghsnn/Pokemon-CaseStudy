@@ -42,6 +42,7 @@ struct ImageModel:Decodable {
 }
 
 struct Sprites: Codable {
+    
     let backDefault: String?
     let backFemale: String?
     let backShiny: String?
@@ -50,8 +51,11 @@ struct Sprites: Codable {
     let frontFemale: String?
     let frontShiny: String?
     let frontShinyFemale: String?
-
-    enum CodingKeys: String, CodingKey {
+    
+    var imageUrlList : [String]? {
+        return [backDefault ?? "", backFemale ?? "", backShiny ?? "", frontDefault ?? "", frontShiny ?? "", frontShinyFemale ?? ""]
+    }
+    enum CodingKeys: String, CodingKey, CaseIterable {
         case backDefault = "back_default"
         case backFemale = "back_female"
         case backShiny = "back_shiny"

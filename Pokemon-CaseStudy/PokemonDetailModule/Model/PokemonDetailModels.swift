@@ -20,7 +20,7 @@ struct PokemonDetailResponseModel: Codable {
     let order: Int?
     let pastTypes: [String]?
     let sprites: Sprites?
-    let stats: [Stat]?
+    let stats: [Stats]?
     let weight: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -61,12 +61,17 @@ struct VersionGroupDetail: Codable {
     }
 }
 // MARK: - Stat
-struct Stat: Codable {
+struct Stats: Codable {
     let baseStat, effort: Int?
-
+    let stat: Stat?
     enum CodingKeys: String, CodingKey {
         case baseStat = "base_stat"
-        case effort
+        case effort, stat
     }
+}
+
+struct Stat: Codable {
+    let name: String?
+    let url: String?
 }
 

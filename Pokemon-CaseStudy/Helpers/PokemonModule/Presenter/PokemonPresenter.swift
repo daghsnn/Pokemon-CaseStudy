@@ -7,7 +7,7 @@
 import Foundation
 
 final class PokemonPresenter: PokemonPresenterProtocol {
-    var view: PokemonViewProtocol?
+    weak var view: PokemonViewProtocol?
     var interactor: PokemonInteractorProtocol?
     var router: PokemonRouterProtocol?
     var requestModel = PokemonRequestModel(limit: 50, offset: 0)

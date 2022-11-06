@@ -9,7 +9,7 @@ import Foundation
 
 final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
 
-    var view: PokemonDetailViewProtocol?
+    weak var view: PokemonDetailViewProtocol?
     var interactor: PokemonDetailInteractorProtocol?
     var router: PokemonDetailRouterProtocol?
     

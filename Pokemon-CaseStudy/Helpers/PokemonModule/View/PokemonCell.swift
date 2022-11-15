@@ -12,6 +12,7 @@ final class PokemonCell: UICollectionViewCell {
     static let cellId:String = "PokemonCell"
     // MARK: - UIElements
     
+    
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "textColor")

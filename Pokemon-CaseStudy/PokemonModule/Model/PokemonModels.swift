@@ -18,15 +18,7 @@ struct ResponseModel: Codable {
 struct Result: Codable {
     let name: String?
     let url: String?
-    var imageUrl: URL? {
-        if let url = url {
-            var replacedString = url.replacingOccurrences(of: NetworkHelpers.BASEURL!, with: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/", options: .anchored)
-            replacedString.removeLast()
-            replacedString.append(".png")
-            return URL(string: replacedString)
-        }
-        return URL(string: "asdsa")
-    }
+    var imageUrl: URL?
 }
 
 struct PokemonRequestModel {

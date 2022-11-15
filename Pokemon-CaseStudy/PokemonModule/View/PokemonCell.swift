@@ -2,7 +2,7 @@
 //  PokemonCell.swift
 //  Pokemon-CaseStudy
 //
-//  Created by Hasan Dag on 5.11.2022.
+//  Created by Hasan Dag on 15.11.2022.
 //
 
 import SDWebImage

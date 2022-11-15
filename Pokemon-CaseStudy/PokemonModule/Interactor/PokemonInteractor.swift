@@ -7,7 +7,7 @@
 import Foundation
 
 final class PokemonInteractor: PokemonInteractorProtocol {
-    
+
     weak var presenter: PokemonInteractorOutputProtocol?
     
     func getPokemons(_ nextPage: String?) {
@@ -17,11 +17,43 @@ final class PokemonInteractor: PokemonInteractorProtocol {
             } else if let data = data {
                 do {
                     let responseModel = try JSONDecoder().decode(ResponseModel.self, from: data)
-                    self?.presenter?.preparePokemons(responseModel)
+                    self?.getPokemonsWithImage(responseModel)
                 } catch {
                     self?.presenter?.displayError(error.localizedDescription)
                 }
             }
         }
     }
+    
+
+    
+    func getPokemonsWithImage(_ response: ResponseModel) {
+        var results : ResponseModel = response
+        guard let responseResult = response.results else {return}
+        let urlList = responseResult.compactMap{$0.url}
+        var ulrStringArray : [String] = [String]()
+        let group = DispatchGroup()
+        DispatchQueue.global(qos: .background).async {
+            for (index, url) in urlList.enumerated() {
+                group.enter()
+                BaseService.shared.sendRequest(NetworkHelpers.configureUrlToPath(url)) { (data, error) in
+                    if let data = data {
+                        do {
+                            defer{group.leave()}
+                            let model = try JSONDecoder().decode(PokemonDetailResponseModel.self, from: data)
+                            results.results?[index].imageUrl = URL(string: model.sprites?.frontDefault ?? model.sprites?.backDefault ?? "")
+                        } catch {
+                        }
+                    }
+                }
+                
+            }
+            group.notify(queue: DispatchQueue.main) {
+                self.presenter?.preparePokemons(results)
+            }
+        }
+        
+        
+    }
+
 }

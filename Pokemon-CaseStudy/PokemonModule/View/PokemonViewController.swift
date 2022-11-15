@@ -26,6 +26,9 @@ final class PokemonViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        DispatchQueue.main.async {
+            LottieHud.shared.show()
+        }
         presenter?.fetchPokemons(false)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -52,14 +55,15 @@ final class PokemonViewController:UIViewController {
 // MARK:- Display Logic
 extension PokemonViewController: PokemonViewProtocol {
     func updateView(_ result: [Result]) {
-        DispatchQueue.main.async {
-            if let _ = self.pokemons?.count {
-                self.pokemons?.append(contentsOf: result)
-            } else {
-                self.pokemons = result
-            }
-            self.collectionView.reloadData()
+        if let _ = self.pokemons?.count {
+            self.pokemons?.append(contentsOf: result)
+        } else {
+            self.pokemons = result
         }
+        DispatchQueue.main.async {
+            LottieHud.shared.hide()
+        }
+        self.collectionView.reloadData()
     }
     
     func showError(_ error: String) {

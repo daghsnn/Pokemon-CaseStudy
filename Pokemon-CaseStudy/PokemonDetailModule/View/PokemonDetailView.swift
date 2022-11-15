@@ -2,8 +2,9 @@
 //  PokemonDetailView.swift
 //  Pokemon-CaseStudy
 //
-//  Created by Hasan Dag on 5.11.2022.
+//  Created by Hasan Dag on 15.11.2022.
 //
+
 import UIKit
 
 final class PokemonDetailView : UIView {
@@ -258,7 +259,7 @@ final class PokemonDetailView : UIView {
     func displayUI(_ model : PokemonDetailResponseModel) {
         self.imageUrlList = model.sprites?.imageUrlList ?? []
         imgView.sd_setImage(with: URL(string: model.sprites?.frontDefault ?? ""))
-        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(configureImageView), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(configureImageView), userInfo: nil, repeats: true)
         titleLabel.text = model.name?.capitalized
         characterInfoLbl.text = "Height \(String(model.height ?? 0)) - Weight \(String(model.weight ?? 0))"
         configureStats(model.stats)

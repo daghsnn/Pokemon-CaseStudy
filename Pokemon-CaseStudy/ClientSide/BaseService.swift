@@ -57,7 +57,8 @@ final class BaseService : ServiceConfiguration {
 extension BaseService : BaseServiceProtocol {
     func sendRequest(_ nextPage:String?, _ completion: @escaping(Data?, ErrorType?) -> ()) {
         if NetworkReachabilityManager()?.isReachable ?? false {
-            showLoading()
+            // For multitasking calls showLoading is goes to comment line
+//            showLoading()
         } else {
             completion(nil,.unReachable)
         }
@@ -71,8 +72,9 @@ extension BaseService : BaseServiceProtocol {
         }
         
         session.request(url, method: .get, encoding: URLEncoding.httpBody, headers: HTTPHeaders.default).validate(contentType: ["application/json"]).responseJSON { [weak self] (response) in
+            guard let self = self else {return}
             if let statusCode = response.response?.statusCode {
-                self?.hideLoading()
+//                self?.hideLoading()
                 switch statusCode {
                 case 200...299:
                     if let data = response.data {

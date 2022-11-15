@@ -178,8 +178,8 @@
 			children = (
 				A99C016F2913C43900B724B4 /* ClientSide */,
 				A99C01572913B4F100B724B4 /* Helpers */,
-				A93E4A4B2916D15700014F80 /* PokemonDetailModule */,
 				A99C01642913B63F00B724B4 /* PokemonModule */,
+				A93E4A4B2916D15700014F80 /* PokemonDetailModule */,
 				A99C01402913B46400B724B4 /* AppDelegate.swift */,
 				A99C01492913B46F00B724B4 /* Assets.xcassets */,
 				A99C014B2913B46F00B724B4 /* LaunchScreen.storyboard */,
